@@ -1,10 +1,10 @@
 library(class)
 library(dplyr)
-library(class)
 library(C50)
 library(printr)
 
-# read in the data
+# read in the data # reassign depth values under 10 to zero
+#df$depth[df$depth<10] <- 0
 votes <- read.csv("C:/CSC_3220/house-votes-84-numeric.csv", header=TRUE)
 votes
 # separate into training and non-training
@@ -17,7 +17,6 @@ n = nrow(notTrain)
 validationIndex = sample(1:n, size = round(0.5*n), replace=FALSE)
 validation = notTrain[validationIndex,]
 test = notTrain[-validationIndex,]
-
 
 
 server <- function(input, output) {
