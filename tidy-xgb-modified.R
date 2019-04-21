@@ -125,13 +125,13 @@ tr_te %<>%
   data.matrix()
 
 #---------------------------
-cat("Preparing data...\n")
-dtest <- xgb.DMatrix(data = tr_te[-tri, ])
-tr_te <- tr_te[tri, ]
-tri <- caret::createDataPartition(y, p = 0.9, list = F) %>% c()
-dtrain <- xgb.DMatrix(data = tr_te[tri, ], label = y[tri])
-dval <- xgb.DMatrix(data = tr_te[-tri, ], label = y[-tri])
-cols <- colnames(tr_te)
+#cat("Preparing data...\n")
+#dtest <- xgb.DMatrix(data = tr_te[-tri, ])
+#tr_te <- tr_te[tri, ]
+#tri <- caret::createDataPartition(y, p = 0.9, list = F) %>% c()
+#dtrain <- xgb.DMatrix(data = tr_te[tri, ], label = y[tri])
+#dval <- xgb.DMatrix(data = tr_te[-tri, ], label = y[-tri])
+#cols <- colnames(tr_te)
 
 # rm(tr_te, y, tri); gc()
 
@@ -157,7 +157,7 @@ validation = train_data_df[-trainIndex, ]
 y_good_bad_train = y_good_bad[trainIndex]
 y_good_bad_validation = y_good_bad[-trainIndex]
 
-rm(tr_te, train_data_df, dtrain, dtest, dval)
+rm(tr_te)
 
 # C5.0Control settings. Most are default. Default is specified in a comment otherwise
 control <- C5.0Control(
@@ -166,7 +166,7 @@ control <- C5.0Control(
   winnow = TRUE, # Default = FALSE
   noGlobalPruning = FALSE,
   CF = 0.25,
-  minCases = 100, # Default = 2
+  minCases = 1000, # Default = 2
   fuzzyThreshold = FALSE,
   sample = 0,
   seed = sample.int(4096, size = 1) - 1L,
