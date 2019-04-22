@@ -4,7 +4,7 @@ library(shiny)
 ui <- fluidPage(
 
   # App title ----
-  titlePanel("Congressional Voting Records by Bill"),
+  titlePanel("home Credit Default"),
 
   # Sidebar layout with input and output definitions ----
   sidebarLayout(
@@ -15,15 +15,32 @@ ui <- fluidPage(
       # Input: Slider for the number of bins ----
     
       selectInput("model", label = "Model Type",
-                  choices = list("Logistic Regression", "C 5.0"),
-                  selected = "C 5.0")
-
+                  choices = list("knn", "C 5.0"),
+                  selected = "C 5.0"),
+      selectInput("in1", label = "input",
+                  choices = list("1", "2")),
+      selectInput("in2", label = "input",
+                  choices = list("1", "2")),
+      selectInput("in3", label = "input",
+                  choices = list("1", "2")),
+      selectInput("in4", label = "input",
+                  choices = list("1", "2")),
+      selectInput("in5", label = "input",
+                  choices = list("1", "2")),
+      selectInput("in6", label = "input",
+                  choices = list("1", "2")),
+      actionButton("eval", "Evaluate")
+     
+    
     # Main panel for displaying outputs ----
     
       ),
-    plotOutput(outputId = "distPlot")
+    mainPanel (
+      plotOutput(outputId = "distPlot")
+    )
     
     )
+  
     # Create a new row for the table.
   )
 

@@ -27,4 +27,12 @@ server <- function(input, output) {
       plot(model)
     }
     
-})}
+  })
+  observeEvent(input$eval, {
+    
+    # put in the stuff to check input against model 
+    
+  })
+  
+  
+  }
