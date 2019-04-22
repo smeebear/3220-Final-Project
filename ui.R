@@ -29,6 +29,14 @@ ui <- fluidPage(
                   choices = list("1", "2")),
       selectInput("in6", label = "input",
                   choices = list("1", "2")),
+      selectInput("in7", label = "input",
+                  choices = list("1", "2")),
+      selectInput("in8", label = "input",
+                  choices = list("1", "2")),
+      selectInput("in9", label = "input",
+                  choices = list("1", "2")),
+      selectInput("in10", label = "input",
+                  choices = list("1", "2")),
       actionButton("eval", "Evaluate")
      
     
