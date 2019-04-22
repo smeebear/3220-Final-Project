@@ -18,7 +18,7 @@ server <- function(input, output) {
     # put in the stuff to check input against model 
     if(input$education <= 2)
     {
-      if(input$ctg_ratio <= 1.145)
+      if(as.double(input$ctg_ratio) <= 1.145)
       {
         credit = "good"
       }
@@ -30,7 +30,7 @@ server <- function(input, output) {
         }
         else
         {
-          if(input$days_birth <= -12851)
+          if(as.double(input$days_birth) *-365 <= -12851)
           {
             credit = "good"
           }
@@ -43,7 +43,7 @@ server <- function(input, output) {
     }
     else
     {
-      if(input$days_birth <= -14788)
+      if(as.double(input$days_birth) *-365 <= -14788)
       {
         if(as.double(input$annuity_length) <= 10.77844)
         {
@@ -59,7 +59,7 @@ server <- function(input, output) {
           {
             if(input$name_prod_type_min <= 1)
             {
-              if(input$days_credit_mean > -854.5555)
+              if(as.double(input$days_credit_mean) *-1 > -854.5555)
               {
                 credit = "bad"
               }
@@ -74,7 +74,7 @@ server <- function(input, output) {
             }
             else
             {
-              if(input$ctg_ratio <= 1.1584)
+              if(as.double(input$ctg_ratio) <= 1.1584)
               {
                 credit = "good"
               }
@@ -92,7 +92,7 @@ server <- function(input, output) {
       }
       else
       {
-        if(input$ctg_ratio > 1.211197)
+        if(as.double(input$ctg_ratio) > 1.211197)
         {
           credit = "bad"
         }
@@ -111,7 +111,7 @@ server <- function(input, output) {
               if(input$name_contract_status_mean > 1.78125) credit = "bad"
               else
               {
-                if(input$days_credit_mean <= -914.0714) credit = "good"
+                if(as.double(input$days_credit_mean) * -1 <= -914.0714) credit = "good"
                 else credit = "bad"
               }
             }
