@@ -121,6 +121,26 @@ server <- function(input, output) {
     }
     output$text = renderPrint({credit})
     
+    output$image2 <- renderImage({
+      if (is.null(input$picture))
+        return(NULL)
+      
+      if (credit == "good") {
+        return(list(
+          src = "thumbsup.jpg",
+          contentType = "image/jpg",
+          alt = "good"
+        ))
+      } else if (credit == "bad") {
+        return(list(
+          src = "thumbsdown.jpg",
+          filetype = "image/jpg",
+          alt = "bad"
+        ))
+      }
+      
+    }, deleteFile = FALSE)
+    
   })
   
   
