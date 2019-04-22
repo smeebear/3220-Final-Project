@@ -122,7 +122,7 @@ server <- function(input, output) {
     output$text = renderPrint({credit})
 
     output$credit_opinion <- renderImage({
-      if (is.null(input$picture))
+      if (is.null(credit))
         return(NULL)
       
       if (credit == "good") {
@@ -133,6 +133,8 @@ server <- function(input, output) {
         ))
       } else if (credit == "bad") {
         return(list(
+          width = 300,
+          height = 300,
           src = "thumbsdown.jpg",
           filetype = "image/jpg",
           alt = "bad"
