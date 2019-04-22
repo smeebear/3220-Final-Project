@@ -1,0 +1,36 @@
+NAME_EDUCATION_TYPE <= 2:
+:...CREDIT_TO_GOODS_RATIO <= 1.1452: good (49854.2/2218)
+:   CREDIT_TO_GOODS_RATIO > 1.1452:
+:   :...ANNUITY_LENGTH > 21.45468: good (13766.6/766)
+:       ANNUITY_LENGTH <= 21.45468:
+:       :...DAYS_BIRTH <= -12851: good (6135.6/502.3)
+:           DAYS_BIRTH > -12851: bad (5270.5/4744.9)
+NAME_EDUCATION_TYPE > 2:
+:...DAYS_BIRTH <= -14788:
+    :...ANNUITY_LENGTH <= 10.77844: good (14490.3/521)
+    :   ANNUITY_LENGTH > 10.77844:
+    :   :...ANNUITY_LENGTH <= 12.6609: bad (4362.1/3687.1)
+    :       ANNUITY_LENGTH > 12.6609:
+    :       :...NAME_PRODUCT_TYPE_min <= 1:
+    :           :...DAYS_CREDIT_mean > -854.5555: bad (9642.7/8262.4)
+    :           :   DAYS_CREDIT_mean <= -854.5555:
+    :           :   :...NAME_CONTRACT_STATUS_mean <= 1.814815: good (13333.7/912.5)
+    :           :       NAME_CONTRACT_STATUS_mean > 1.814815: bad (5451.2/4865.1)
+    :           NAME_PRODUCT_TYPE_min > 1:
+    :           :...CREDIT_TO_GOODS_RATIO <= 1.1584: good (55100.2/2695.4)
+    :               CREDIT_TO_GOODS_RATIO > 1.1584:
+    :               :...CODE_GENDER <= 1: good (26779.8/1737.1)
+    :                   CODE_GENDER > 1: bad (10839.1/9618.5)
+    DAYS_BIRTH > -14788:
+    :...CREDIT_TO_GOODS_RATIO > 1.211197: bad (22121.4/18517.7)
+        CREDIT_TO_GOODS_RATIO <= 1.211197:
+        :...DAYS_EMPLOYED <= -1785:
+            :...NAME_CONTRACT_STATUS_mean <= 1.636364: good (19076.4/1292.1)
+            :   NAME_CONTRACT_STATUS_mean > 1.636364: bad (7123.4/6315.7)
+            DAYS_EMPLOYED > -1785:
+            :...PAYMENT_PERC_mean <= 0.9294118: bad (9197/7690)
+                PAYMENT_PERC_mean > 0.9294118:
+                :...NAME_CONTRACT_STATUS_mean > 1.78125: bad (7611.6/6479)
+                    NAME_CONTRACT_STATUS_mean <= 1.78125:
+                    :...DAYS_CREDIT_mean <= -914.0714: good (11417.4/918.2)
+                        DAYS_CREDIT_mean > -914.0714: bad (15937.7/14114.1)
