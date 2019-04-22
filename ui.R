@@ -39,7 +39,8 @@ ui <- fluidPage(
     
       ),
     mainPanel (
-      verbatimTextOutput("text")
+      verbatimTextOutput("text"),
+      imageOutput("credit_opinion")
     )
     
     )
