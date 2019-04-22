@@ -4,12 +4,12 @@ library(C50)
 library(printr)
 library(shiny)
 
-credit = TRUE
+credit = "good"
 err = 0
 
 server <- function(input, output) {
   
-  output$text = renderPrint({list(credit)})
+  output$text = renderPrint({credit})
   
   #output$credit = "bad"
   
@@ -119,6 +119,7 @@ server <- function(input, output) {
         }
       }
     }
+    output$text = renderPrint({credit})
     
   })
   
