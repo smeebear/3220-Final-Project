@@ -4,8 +4,10 @@ library(C50)
 library(printr)
 library(shiny)
 
+
 credit = "good"
 err = 0
+
 
 server <- function(input, output) {
   
