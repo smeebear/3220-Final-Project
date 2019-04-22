@@ -166,7 +166,7 @@ control <- C5.0Control(
   winnow = TRUE, # Default = FALSE
   noGlobalPruning = FALSE,
   CF = 0.25,
-  minCases = 1000, # Default = 2
+  minCases = 10000, # Default = 2
   fuzzyThreshold = FALSE,
   sample = 0,
   seed = sample.int(4096, size = 1) - 1L,
@@ -175,17 +175,17 @@ control <- C5.0Control(
 )
 
 # Train data
-model <- C5.0(train, y_good_bad_train, control = control, costs = cost_mat)
+model <- C5.0(train_data_df, y_good_bad, control = control, costs = cost_mat)
 
 
 # estimate the performance using randomly partitioned data
-predicted.labels = predict(model, validation)
-num.incorrect.labels = sum(predicted.labels != y_good_bad_validation)
-misclassification.rate = num.incorrect.labels / nrow(validation)
+#predicted.labels = predict(model, validation)
+#num.incorrect.labels = sum(predicted.labels != y_good_bad_validation)
+#misclassification.rate = num.incorrect.labels / nrow(validation)
 # evaluate and return accuracy
-num.correct.labels = sum(predicted.labels == y_good_bad_validation)
-accuracy = num.correct.labels / nrow(validation)
-print(sprintf("misclassification.rate: %f, accuracy: %f", misclassification.rate, accuracy))
+#num.correct.labels = sum(predicted.labels == y_good_bad_validation)
+#accuracy = num.correct.labels / nrow(validation)
+#print(sprintf("misclassification.rate: %f, accuracy: %f", misclassification.rate, accuracy))
 
 
 # Evaluate on test data and write results
@@ -193,7 +193,7 @@ predicted.test <- predict(model, test_data_df)
 read_csv("input/sample_submission.csv") %>%  
   mutate(SK_ID_CURR = as.integer(SK_ID_CURR),
          TARGET = ifelse(predicted.test == 'good', 0, 1)) %>%
-  write_csv(paste0("tidy_xgb_C5_0_", round(accuracy, 5), ".csv"))
+  write_csv(paste0("tidy_xgb_C5_0_full_training_set.csv"))
 
 # End my code
 
