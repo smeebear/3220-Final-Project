@@ -13,10 +13,6 @@ ui <- fluidPage(
     sidebarPanel(
     
       # Input: Slider for the number of bins ----
-    
-      selectInput("model", label = "Model Type",
-                  choices = list("knn", "C 5.0"),
-                  selected = "C 5.0"),
       selectInput("in1", label = "input",
                   choices = list("1", "2")),
       selectInput("in2", label = "input",
