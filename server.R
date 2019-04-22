@@ -121,7 +121,7 @@ server <- function(input, output) {
     }
     output$text = renderPrint({credit})
     
-    output$image2 <- renderImage({
+    output$credit_opinion <- renderImage({
       if (is.null(input$picture))
         return(NULL)
       
