@@ -124,17 +124,6 @@ tr_te %<>%
   mutate_all(funs(ifelse(is.infinite(.), NA, .))) %>% 
   data.matrix()
 
-#---------------------------
-#cat("Preparing data...\n")
-#dtest <- xgb.DMatrix(data = tr_te[-tri, ])
-#tr_te <- tr_te[tri, ]
-#tri <- caret::createDataPartition(y, p = 0.9, list = F) %>% c()
-#dtrain <- xgb.DMatrix(data = tr_te[tri, ], label = y[tri])
-#dval <- xgb.DMatrix(data = tr_te[-tri, ], label = y[-tri])
-#cols <- colnames(tr_te)
-
-# rm(tr_te, y, tri); gc()
-
 # My code
 
 # Convert tr_te to train and test data frames
@@ -154,8 +143,6 @@ nData <- nrow(train_data_df)
 trainIndex = sample(1:nData, size = round(0.8*nData), replace=FALSE)
 train = train_data_df[trainIndex ,]
 validation = train_data_df[-trainIndex, ]
-y_good_bad_train = y_good_bad[trainIndex]
-y_good_bad_validation = y_good_bad[-trainIndex]
 
 rm(tr_te)
 
@@ -178,50 +165,9 @@ control <- C5.0Control(
 model <- C5.0(train_data_df, y_good_bad, control = control, costs = cost_mat)
 
 
-# estimate the performance using randomly partitioned data
-#predicted.labels = predict(model, validation)
-#num.incorrect.labels = sum(predicted.labels != y_good_bad_validation)
-#misclassification.rate = num.incorrect.labels / nrow(validation)
-# evaluate and return accuracy
-#num.correct.labels = sum(predicted.labels == y_good_bad_validation)
-#accuracy = num.correct.labels / nrow(validation)
-#print(sprintf("misclassification.rate: %f, accuracy: %f", misclassification.rate, accuracy))
-
-
 # Evaluate on test data and write results
 predicted.test <- predict(model, test_data_df)
 read_csv("input/sample_submission.csv") %>%  
   mutate(SK_ID_CURR = as.integer(SK_ID_CURR),
          TARGET = ifelse(predicted.test == 'good', 0, 1)) %>%
   write_csv(paste0("tidy_xgb_C5_0_full_training_set.csv"))
-
-# End my code
-
-#---------------------------
-#cat("Training model...\n")
-#p <- list(objective = "binary:logistic",
-#          booster = "gbtree",
-#          eval_metric = "auc",
-#          nthread = 4,
-#          eta = 0.05,
-#          max_depth = 6,
-#          min_child_weight = 30,
-#          gamma = 0,
-#          subsample = 0.85,
-#          colsample_bytree = 0.7,
-#          colsample_bylevel = 0.632,
-#          alpha = 0,
-#          lambda = 0,
-#          nrounds = 2000)
-#
-#set.seed(0)
-#m_xgb <- xgb.train(p, dtrain, p$nrounds, list(val = dval), print_every_n = 50, early_stopping_rounds = 300)
-#
-#xgb.importance(cols, model=m_xgb) %>% 
-#  xgb.plot.importance(top_n = 30)
-#
-#---------------------------
-#read_csv("input/sample_submission.csv") %>%  
-#  mutate(SK_ID_CURR = as.integer(SK_ID_CURR),
-#         TARGET = predict(m_xgb, dtest)) %>%
-#  write_csv(paste0("tidy_xgb_", round(m_xgb$best_score, 5), ".csv"))
