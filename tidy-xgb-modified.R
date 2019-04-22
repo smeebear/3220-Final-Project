@@ -85,7 +85,7 @@ tr_te <- tr %>%
   left_join(sum_payments, by = "SK_ID_CURR") %>% 
   left_join(sum_pc_balance, by = "SK_ID_CURR") %>% 
   left_join(sum_prev, by = "SK_ID_CURR") %>% 
-  select(-SK_ID_CURR) %>% 
+  select(-c(SK_ID_CURR, EXT_SOURCE_1, EXT_SOURCE_2, EXT_SOURCE_3)) %>% 
   mutate_if(is.character, funs(factor(.) %>% as.integer)) %>% 
   mutate(na = apply(., 1, function(x) sum(is.na(x))),
          DAYS_EMPLOYED = ifelse(DAYS_EMPLOYED == 365243, NA, DAYS_EMPLOYED),
@@ -98,7 +98,6 @@ tr_te <- tr %>%
          CHILDREN_RATIO = CNT_CHILDREN / CNT_FAM_MEMBERS, 
          CREDIT_TO_GOODS_RATIO = AMT_CREDIT / AMT_GOODS_PRICE,
          INC_PER_CHLD = AMT_INCOME_TOTAL / (1 + CNT_CHILDREN),
-         SOURCES_PROD = EXT_SOURCE_1 * EXT_SOURCE_2 * EXT_SOURCE_3,
          CAR_TO_BIRTH_RATIO = OWN_CAR_AGE / DAYS_BIRTH,
          CAR_TO_EMPLOY_RATIO = OWN_CAR_AGE / DAYS_EMPLOYED,
          PHONE_TO_BIRTH_RATIO = DAYS_LAST_PHONE_CHANGE / DAYS_BIRTH,
@@ -117,14 +116,14 @@ rm(tr, te, fn, sum_bureau, sum_cc_balance,
 tr_te %<>% 
   mutate(DOC_IND_KURT = apply(tr_te[, docs], 1, moments::kurtosis),
          LIVE_IND_SUM = apply(tr_te[, live], 1, sum),
-         NEW_INC_BY_ORG = recode(tr_te$ORGANIZATION_TYPE, !!!inc_by_org),
-         NEW_EXT_SOURCES_MEAN = apply(tr_te[, c("EXT_SOURCE_1", "EXT_SOURCE_2", "EXT_SOURCE_3")], 1, mean),
-         NEW_SCORES_STD = apply(tr_te[, c("EXT_SOURCE_1", "EXT_SOURCE_2", "EXT_SOURCE_3")], 1, sd))%>%
+         NEW_INC_BY_ORG = recode(tr_te$ORGANIZATION_TYPE, !!!inc_by_org))%>%
   mutate_all(funs(ifelse(is.nan(.), NA, .))) %>% 
   mutate_all(funs(ifelse(is.infinite(.), NA, .))) %>% 
   data.matrix()
 
 # My code
+
+cat("Building model...\n")
 
 # Convert tr_te to train and test data frames
 tri <- 1:length(y)
@@ -164,6 +163,7 @@ control <- C5.0Control(
 # Train data
 model <- C5.0(train_data_df, y_good_bad, control = control, costs = cost_mat)
 
+cat("Running model on test data...\n")
 
 # Evaluate on test data and write results
 predicted.test <- predict(model, test_data_df)
