@@ -19,7 +19,7 @@ ui <- fluidPage(
                   choices = list("ratio <= 1.452"= 1.452, "ratio > 1.452" = 2)),
       selectInput("days_birth", label = "Age",
                   choices = list("Younger than 40" = -14782, "Older than 40" = -14800)),
-      textInput("annuity_length", "ANNUITY_LENGTH = AMT_CREDIT / AMT_ANNUITY"),
+      textInput("annuity_length", "ANNUITY_LENGTH = AMT_CREDIT / AMT_ANNUITY", value="12.34"),
       selectInput("name_prod_type_min", label = "Name of Product Type",
                   choices = list("x-sell"=1, "walk-in"=2)),
       selectInput("name_contract_status_mean", label = "status of previous application",
