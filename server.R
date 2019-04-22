@@ -14,6 +14,9 @@ server <- function(input, output) {
       plot(model)
     
   })
+  
+  output$credit = FALSE
+  
   observeEvent(input$eval, {
     
     # put in the stuff to check input against model 
@@ -21,23 +24,23 @@ server <- function(input, output) {
     {
       if(input$ctg_ratio <= 1.145)
       {
-        credit = TRUE
+        output$credit = TRUE
       }
       else
       {
         if(input$annuity_length > 21.45468)
         {
-          credit = TRUE
+          output$credit = TRUE
         }
         else
         {
           if(input$days_birth <= -12851)
           {
-            credit = TRUE
+            output$credit = TRUE
           }
           else
           {
-            credit = FALSE
+            output$credit = FALSE
           }
         }
       }
@@ -48,13 +51,13 @@ server <- function(input, output) {
       {
         if(input$annuity_length <= 10.77844)
         {
-          credit = TRUE
+          output$credit = TRUE
         }
         else
         {
           if(input$annuity_length <= 12.6609)
           {
-            credit = FALSE
+            output$credit = FALSE
           }
           else
           {
@@ -62,30 +65,30 @@ server <- function(input, output) {
             {
               if(input$days_credit_mean > -854.5555)
               {
-                credit = FALSE
+                output$credit = FALSE
               }
               else
               {
                 if(input$name_contract_status_mean <= 1.814815)
                 {
-                  credit = TRUE
+                  output$credit = TRUE
                 }
-                else credit = FALSE
+                else output$credit = FALSE
               }
             }
             else
             {
               if(input$ctg_ratio <= 1.1584)
               {
-                credit = TRUE
+                output$credit = TRUE
               }
               else
               {
                 if(input$code_gender <= 1)
                 {
-                  credit = TRUE
+                  output$credit = TRUE
                 }
-                else credit = FALSE
+                else output$credit = FALSE
               }
             }
           }
@@ -95,7 +98,28 @@ server <- function(input, output) {
       {
         if(input$ctg_ratio > 1.211197)
         {
-          credit = FALSE
+          output$credit = FALSE
+        }
+        else
+        {
+          if(input$days_employed <= -1785)
+          {
+            if(input$name_contract_status_mean <= 1.636364) output$credit = TRUE
+            else output$credit = FALSE
+          }
+          else
+          {
+            if(input$payment_perc_mean <= 0.9294118) output$credit = FALSE
+            else
+            {
+              if(input$name_contract_status_mean > 1.78125) output$credit = FALSE
+              else
+              {
+                if(input$days_credit_mean <= -914.0714) output$credit = TRUE
+                else output$credit = FALSE
+              }
+            }
+          }
         }
       }
     }
