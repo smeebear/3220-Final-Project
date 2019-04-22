@@ -145,5 +145,16 @@ server <- function(input, output) {
     
   })
   
+  output$tree = renderImage({
+    return(list(
+      width = 600,
+      height = 500,
+      src = "tree.png",
+      filetype = "image/png",
+      alt = "tree"
+    ))
+    
+  }, deleteFile = FALSE)
+  
   
   }

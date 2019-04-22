@@ -14,7 +14,7 @@ ui <- fluidPage(
     
       # Input: Slider for the number of bins ----
       selectInput("education", label = "Education Type",
-                  choices = list("Higher Education" = 2, "Secondary/ Secondary sepcial" =3, "Incomplete Higher"=5, "lower secondary"=4, "Academic Degree"=1)),
+                choices = list("Higher Education" = 2, "Secondary/ Secondary sepcial" =3, "Incomplete Higher"=5, "lower secondary"=4, "Academic Degree"=1)),
       textInput("ctg_ratio", label = "CREDIT_TO_GOODS_RATIO = AMT_CREDIT / AMT_GOODS_PRICE", value = "1.145"),
       textInput("days_birth", label = "Age", value = "45"),
       textInput("annuity_length", "ANNUITY_LENGTH = AMT_CREDIT / AMT_ANNUITY", value="12.34"),
@@ -37,7 +37,8 @@ ui <- fluidPage(
       ),
     mainPanel (
       verbatimTextOutput("text"),
-      imageOutput("credit_opinion")
+      imageOutput("credit_opinion"),
+      imageOutput("tree")
     )
     
     )
