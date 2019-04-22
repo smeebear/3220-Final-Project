@@ -24,7 +24,7 @@ server <- function(input, output) {
       }
       else
       {
-        if(input$annuity_length > 21.45468)
+        if(as.double(input$annuity_length) > 21.45468)
         {
           credit = "good"
         }
@@ -45,13 +45,13 @@ server <- function(input, output) {
     {
       if(input$days_birth <= -14788)
       {
-        if(input$annuity_length <= 10.77844)
+        if(as.double(input$annuity_length) <= 10.77844)
         {
           credit = "good"
         }
         else
         {
-          if(input$annuity_length <= 12.6609)
+          if(as.double(input$annuity_length) <= 12.6609)
           {
             credit = "bad"
           }

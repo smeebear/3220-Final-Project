@@ -4,7 +4,7 @@ library(shiny)
 ui <- fluidPage(
 
   # App title ----
-  titlePanel("home Credit Default"),
+  titlePanel("Home Credit Default"),
 
   # Sidebar layout with input and output definitions ----
   sidebarLayout(
